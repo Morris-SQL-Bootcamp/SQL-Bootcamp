@@ -1,0 +1,29 @@
+###############################################################################
+##                   Connect to AWS and Perform a Select                     ##       
+## install psycopg2 using anaconda prompt  and type conda install psycopg2   ##   
+## Connection to AWS is available per General Assembly                       ##
+###############################################################################
+''' This example shows how to connect to a database, and then obtain and use a 
+cursor object to retrieve records from a table.'''
+
+import psycopg2
+import sys
+import pprint
+import pandas 
+ 
+
+#Define our connection stri
+conn_string = "host='analyticsga.cuwj8wuu6wbh.us-west-2.rds.amazonaws.com'dbname='iowa_liquor_sales_database' user='analytics_student' password='analyticsga'"
+ 
+# print the connection string we will use to connect
+ 
+# get a connection, if a connect cannot be made an exception will be raised here
+conn = psycopg2.connect(conn_string)
+ 
+# conn.cursor will return a cursor object, you can use this cursor to perform queries
+cursor = conn.cursor()
+print ("Connected!\n")
+ 
+df = pd.read_sql_query('select * from products', conn)
+df
+
